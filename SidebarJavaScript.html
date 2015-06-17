@@ -1,0 +1,41 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+  
+  $(function() {
+   
+    $('#sidebar-put-button').click(onPutClick);
+    
+  });
+  
+  function onPutClick() {
+    this.disabled = true;
+    
+    var value = $('#sidebar-value').val();
+    var value = $('#sidebar-value').val();
+  
+    google.script.run
+        .withSuccessHandler(
+          function(msg, element) {
+          
+            element.disabled = false;
+          })
+        .withFailureHandler
+        (
+          function(msg, element) {
+           
+            showStatus(msg, 'error');
+            element.disabled = false;
+          })
+        .withUserObject(this)
+        .setActiveValue(value);
+  }
+  
+  function showStatus(msg, classId) {
+    $('#sidebar-status').removeClass().html(msg);
+    if (classId) {
+      $('#sidebar-status').addClass(classId);
+    }
+  }
+
+
+</script>
